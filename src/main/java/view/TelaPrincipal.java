@@ -9,6 +9,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 public class TelaPrincipal {
 
@@ -49,19 +50,21 @@ public class TelaPrincipal {
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		
-		JMenuItem mntmNewMenuItem_3 = new JMenuItem("New menu item");
+		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Home");
+		mntmNewMenuItem_3.setHorizontalAlignment(SwingConstants.CENTER);
 		menuBar.add(mntmNewMenuItem_3);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Pesquisar");
+		JMenuItem mntmNewMenuItem = new JMenuItem("Minha loja");
 		menuBar.add(mntmNewMenuItem);
 		
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("New menu item");
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Pesquisa");
 		menuBar.add(mntmNewMenuItem_2);
 		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("New menu item");
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Carrinho");
+		mntmNewMenuItem_1.setHorizontalAlignment(SwingConstants.CENTER);
 		menuBar.add(mntmNewMenuItem_1);
 		
-		JMenu mnNewMenu = new JMenu("New menu");
+		JMenu mnNewMenu = new JMenu("Config");
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Cadastrar");
@@ -76,6 +79,9 @@ public class TelaPrincipal {
 		
 		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Login");
 		mnNewMenu.add(mntmNewMenuItem_4);
+		
+		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Perfil");
+		mnNewMenu.add(mntmNewMenuItem_7);
 		
 		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Sair");
 		mnNewMenu.add(mntmNewMenuItem_6);

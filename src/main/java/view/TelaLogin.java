@@ -10,8 +10,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 public class TelaLogin extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField textFUsuario;
+	private JTextField textFSenha;
 
 	/**
 	 * Create the panel.
@@ -40,22 +40,22 @@ public class TelaLogin extends JPanel {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("top:default:grow"),}));
 		
-		JLabel lblNewLabel = new JLabel("Usuario :");
-		add(lblNewLabel, "4, 4");
+		JLabel lblUsuario = new JLabel("Usuario :");
+		add(lblUsuario, "4, 4");
 		
-		textField = new JTextField();
-		add(textField, "8, 4");
-		textField.setColumns(20);
+		textFUsuario = new JTextField();
+		add(textFUsuario, "8, 4");
+		textFUsuario.setColumns(20);
 		
-		JLabel lblNewLabel_1 = new JLabel("Senha :");
-		add(lblNewLabel_1, "4, 6");
+		JLabel lblSenha = new JLabel("Senha :");
+		add(lblSenha, "4, 6");
 		
-		textField_1 = new JTextField();
-		add(textField_1, "8, 6");
-		textField_1.setColumns(20);
+		textFSenha = new JTextField();
+		add(textFSenha, "8, 6");
+		textFSenha.setColumns(20);
 		
-		JButton btnNewButton = new JButton("Login");
-		add(btnNewButton, "8, 8");
+		JButton btnLogin = new JButton("Login");
+		add(btnLogin, "8, 8");
 
 	}
 
