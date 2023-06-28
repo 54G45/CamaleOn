@@ -21,6 +21,11 @@ public class ProdutoController {
 		
 		return pBo.pesquisar(pesquisa);
 	}
+
+	public ArrayList<Produto> buscarCarrinho(int idLogado) {
+		
+		return pBo.buscarCarrinho(idLogado);
+	}
 	
 	
 

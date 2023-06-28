@@ -28,7 +28,7 @@ public class TelaPesquisa extends Painel {
 	private JTable table;
 	private Pesquisa pesquisa;
 	private JTextField textFNomeProduto;
-	ArrayList<Produto> produtos;
+	private ArrayList<Produto> produtos;
 	private String[] categorias = { "cpu", "gpu", "placa-mãe", "RAM", "fonte" };
 	private String[] nomesColunas = { "Produto ", "Descrição", "Categoria", "Preço", "Vendedor" };
 	private JComboBox cBCategoria;
@@ -108,7 +108,6 @@ public class TelaPesquisa extends Painel {
 		produtos = new ArrayList<Produto>();
 		produtos = this.pesquisar(cont);
 
-//		perguntas = perguntaController.busca(textFDuvida.getText());
 
 		limparTabela();
 

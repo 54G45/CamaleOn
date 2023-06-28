@@ -4,6 +4,7 @@ import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
@@ -17,6 +18,7 @@ import controller.BitShowController;
 import model.vo.Produto;
 
 public class TelaProduto extends Painel {
+	Produto produto;
 
 	private JLabel lblNome;
 	private JLabel lblCategoria;
@@ -90,7 +92,12 @@ public class TelaProduto extends Painel {
 
 	}
 
+	public JButton getBtnAdicionarAoCarrinho() {
+		return btnAdicionarAoCarrinho;
+	}
+
 	public void atualizarCampos(Produto p) {
+		produto = p;
 		
 		lblNome.setText("Nome : " + p.getNome());
 		lblCategoria.setText("Categoria : " + p.getCategoria());
@@ -101,8 +108,14 @@ public class TelaProduto extends Painel {
 		
 	}
 	
-	public void adicionarAoCarrinho(BitShowController cont, int idProduto, int idUsuario) {
+	public void adicionarAoCarrinho(BitShowController cont, int idUsuario) {
 		
+		int chave = cont.getCarDAO().adicionarAoCarrinho(produto.getId(), idUsuario);
+		if(chave >= 0) {
+			JOptionPane.showMessageDialog(null, "Produto adicionado ao Carrinho com Sucesso");
+		}else{
+			JOptionPane.showMessageDialog(null, "Falha ao adicionar Produto ao Carrinho");
+		}
 		
 	}
 	

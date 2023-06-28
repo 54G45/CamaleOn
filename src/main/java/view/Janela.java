@@ -182,32 +182,53 @@ public class Janela {
 			}
 		});
 		menuBar.add(mntmPesquisa);
-		
+
 		telaPesquisa.getBtnDetalhes().addActionListener(new ActionListener() {
-			
+
 			public void actionPerformed(ActionEvent e) {
-				
+
 				try {
 					telaProduto.atualizarCampos(telaPesquisa.resgatarPergunta());
 					trocarPainel(telaProduto);
 				} catch (BitShowException erro) {
 					JOptionPane.showMessageDialog(null, erro.getMessage(), "Atenção!", JOptionPane.INFORMATION_MESSAGE);
-					erro.printStackTrace();
 				}
-				
+
 			}
 		});
 		
+		telaProduto.getBtnAdicionarAoCarrinho().addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+
+				telaProduto.adicionarAoCarrinho(cont, userLogado.getId());
+
+			}
+		});
+
 		JMenuItem mntmCarrinho = new JMenuItem("Carrinho");
 		mntmCarrinho.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				telaCarrinho.atualizarCampos();
+				telaCarrinho.atualizarCampos(cont, userLogado.getId());
 				trocarPainel(telaCarrinho);
 
 			}
 		});
 		menuBar.add(mntmCarrinho);
+
+		telaCarrinho.getBtnRemover().addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+
+				try {
+					telaCarrinho.removerDoCarrinho(cont);
+				} catch (BitShowException erro) {
+					JOptionPane.showMessageDialog(null, erro.getMessage(), "Atenção!", JOptionPane.INFORMATION_MESSAGE);
+				}
+
+			}
+		});
 
 		JMenu mnConfig = new JMenu("Config");
 		menuBar.add(mnConfig);

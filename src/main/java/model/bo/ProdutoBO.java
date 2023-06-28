@@ -22,4 +22,9 @@ public class ProdutoBO {
 		return pDao.pesquisar(pesquisa);
 	}
 
+	public ArrayList<Produto> buscarCarrinho(int idLogado) {
+		
+		return pDao.buscarCarrinho(idLogado);
+	}
+
 }

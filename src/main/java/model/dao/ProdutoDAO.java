@@ -91,6 +91,38 @@ public class ProdutoDAO {
 		return produtos;
 
 	}
+	
+	public ArrayList<Produto> buscarCarrinho(int iD) {
+		
+		String sql ="select produto.* from produto left join carrinho on carrinho.idproduto = produto.id where carrinho.idusuario = " + iD;
+		
+		ArrayList<Produto> produtos = new ArrayList<Produto>();
+		Connection conn = Banco.getConnection();
+		Statement pstmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		try {
+			resultado = pstmt.executeQuery(sql);
+			while(resultado.next()){
+				
+				Produto produto = montaProduto(resultado);
+				
+				produtos.add(produto);
+			}
+		}
+		catch(SQLException e){
+			System.out.println("Erro no método busca da classe PerguntaDAO");
+			System.out.println(e.getMessage());
+		}
+		finally{
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(pstmt);
+			Banco.closeConnection(conn);
+		}
+	
+		return produtos;
+		
+	}
+	
 
 	public Produto montaProduto(ResultSet rs) throws SQLException{
 		Usuario usuario = new Usuario();

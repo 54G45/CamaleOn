@@ -39,6 +39,25 @@ create table categoria(
 
 
 
+select*from usuario;
+select*from produto;
+select*from carrinho;
+insert into carrinho values(null, 1, 2);
+
+select produto.* from produto left join carrinho on carrinho.idproduto = produto.id where carrinho.idusuario = 1;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
