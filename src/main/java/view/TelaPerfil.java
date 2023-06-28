@@ -1,37 +1,42 @@
 package view;
 
-import javax.swing.JTable;
+import java.awt.Font;
+
+import javax.swing.JLabel;
 
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
-public class TelaInicial extends Painel {
-	private JTable table;
+public class TelaPerfil extends Painel {
 
 	/**
 	 * Create the panel.
 	 */
-	public TelaInicial() {
+	public TelaPerfil() {
 		setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("right:default:grow"),
+				ColumnSpec.decode("default:grow"),
 				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(364dlu;default):grow"),
+				FormSpecs.DEFAULT_COLSPEC,
 				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("left:default:grow"),},
+				ColumnSpec.decode("default:grow"),},
 			new RowSpec[] {
-				RowSpec.decode("bottom:default:grow"),
+				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("max(183dlu;default):grow"),
+				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("top:default:grow"),}));
+				FormSpecs.DEFAULT_ROWSPEC,}));
 		
-		table = new JTable();
-		add(table, "3, 3, fill, fill");
+		JLabel lblNewLabel = new JLabel("Perfil");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		add(lblNewLabel, "3, 3");
 
 	}
 
+	
+	
+	
 	
 	
 	
