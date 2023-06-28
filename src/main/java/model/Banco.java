@@ -11,7 +11,7 @@ public class Banco {
 	public static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 	public static final String NOME_BANCO = "dbbitshow";
 	public static final String USUARIO = "root";
-	public static final String SENHA = "admin";
+	public static final String SENHA = "root";
 	public static final String URL = "jdbc:mysql://localhost:3306/" + NOME_BANCO
 			+ "?useSSL=false&serverTimezone=UTC&useTimezone=true";
 	

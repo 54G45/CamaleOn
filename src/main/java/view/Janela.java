@@ -102,7 +102,7 @@ public class Janela {
 				try {
 					userLogado = telaCadastro.resgatarUser();
 					cont.getUsuarioController().cadastrar(userLogado);
-					JOptionPane.showMessageDialog(null, "Cadastro com sucseo");
+					JOptionPane.showMessageDialog(null, "Cadastro com sucesso");
 					trocarPainel(telaLogin);
 				} catch (BitShowException erro) {
 					JOptionPane.showMessageDialog(null, erro.getMessage(), "Atenção!", JOptionPane.WARNING_MESSAGE);

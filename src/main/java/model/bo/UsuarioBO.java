@@ -6,8 +6,8 @@ import model.vo.Usuario;
 public class UsuarioBO {
 	private UsuarioDAO uDao = new UsuarioDAO();
 
-	public void cadastrar(Usuario u) {
-		uDao.cadastrar(u);
+	public int cadastrar(Usuario u) {
+		return uDao.cadastrar(u);
 
 	}
 	

@@ -95,7 +95,7 @@ public class TelaCadastro extends Painel {
 		textFEMail.setColumns(20);
 		add(textFEMail, "3, 11");
 				
-						JLabel lblTelefone = new JLabel("Nome :");
+						JLabel lblTelefone = new JLabel("Telefone:");
 						add(lblTelefone, "3, 13");
 		
 				textFTelefone = new JTextField();

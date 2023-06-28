@@ -8,7 +8,7 @@ create table usuario(
 	id int not null auto_increment primary key,
     usuario varchar(50) not null,
     e_mail varchar(100) unique not null, 
-    telefone varchar(10) not null,
+    telefone varchar(15) not null,
     senha varchar(50) not null
 );
 
