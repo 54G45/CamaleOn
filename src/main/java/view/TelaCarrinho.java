@@ -105,7 +105,7 @@ public class TelaCarrinho extends Painel {
 		Produto produto = resgatarPergunta();
 
 		int chave = cont.getCarDAO().removerDoCarrinho(produto.getId());
-		if (chave >= 0) {
+		if (chave > 0) {
 			JOptionPane.showMessageDialog(null, "Produto Removido do Carrinho com Sucesso");
 		} else {
 			JOptionPane.showMessageDialog(null, "Falha ao Remover Produto do Carrinho");

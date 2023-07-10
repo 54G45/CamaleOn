@@ -43,29 +43,23 @@ public class CarrinhoDAO {
 	public int removerDoCarrinho(int id) {
 		// TODO Auto-generated method stub
 		
-		String sql = "delete from carrinho where carrinho.id = " + id;
-		int chaveRetornada = -1;
+		String sql = "delete from carrinho where carrinho.idproduto = " + id;
+		int linhasAfetadas = 0;
 		Connection con = Banco.getConnection();
-		PreparedStatement pStmt = Banco.getPreparedStmtPK(con, sql);
-		ResultSet rs = null;
+		PreparedStatement pStmt = Banco.getPreparedStmt(con, sql);
 		try {
-			pStmt.executeUpdate();
+			
+			linhasAfetadas = pStmt.executeUpdate();
 
-			rs = pStmt.getGeneratedKeys();
-
-			if (rs.next()) {
-				chaveRetornada = rs.getInt(1);
-			}
 		} catch (SQLException e) {
 			System.out.println("Erro no método excluirCarrinho");
 			System.out.println(e.getMessage());
 		} finally {
-			Banco.closeResultSet(rs);
 			Banco.closeStatement(pStmt);
 			Banco.closeConnection(con);
 		}
 		
-		return chaveRetornada;
+		return linhasAfetadas;
 		
 	}
 	

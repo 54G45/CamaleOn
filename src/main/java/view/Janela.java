@@ -125,17 +125,6 @@ public class Janela {
 		frame.setJMenuBar(menuBar);
 		menuBar.setVisible(false);
 
-		JMenuItem mntmHome = new JMenuItem("Home");
-		mntmHome.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				telaInicial.atualizarCampos();
-				trocarPainel(telaInicial);
-
-			}
-		});
-		menuBar.add(mntmHome);
-
 		JMenuItem mntmMinhaLoja = new JMenuItem("Minha loja");
 		mntmMinhaLoja.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
