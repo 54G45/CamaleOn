@@ -23,14 +23,15 @@ import controller.BitShowController;
 import model.exception.BitShowException;
 import model.vo.Pesquisa;
 import model.vo.Produto;
+import java.awt.SystemColor;
 
 public class TelaPesquisa extends Painel {
 	private JTable table;
 	private Pesquisa pesquisa;
 	private JTextField textFNomeProduto;
 	private ArrayList<Produto> produtos;
-	private String[] categorias = { "cpu", "gpu", "placa-mãe", "RAM", "fonte" };
-	private String[] nomesColunas = { "Produto ", "Descrição", "Categoria", "Preço", "Vendedor" };
+	private String[] categorias = {"cpu", "gpu", "placa-mãe", "RAM", "fonte", "SSD"};
+	private String[] nomesColunas = {"Produto ", "Descrição", "Categoria", "Preço", "Vendedor",};
 	private JComboBox cBCategoria;
 	private JButton btnDetalhes;
 	
@@ -43,13 +44,11 @@ public class TelaPesquisa extends Painel {
 				FormSpecs.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("right:default:grow"),
 				FormSpecs.RELATED_GAP_COLSPEC,
-				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.DEFAULT, Sizes.constant("60dlu", true), Sizes.constant("65dlu", true)), 0),
+				ColumnSpec.decode("left:max(40dlu;min)"),
 				FormSpecs.RELATED_GAP_COLSPEC,
-				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.DEFAULT, Sizes.constant("100dlu", true), Sizes.constant("120dlu", true)), 0),
+				ColumnSpec.decode("max(230dlu;min)"),
 				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.DEFAULT, Sizes.constant("80dlu", true), Sizes.constant("100dlu", true)), 0),
+				ColumnSpec.decode("max(80dlu;min)"),
 				FormSpecs.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("left:default:grow"),},
 			new RowSpec[] {
@@ -60,28 +59,29 @@ public class TelaPesquisa extends Painel {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
-				new RowSpec(RowSpec.CENTER, Sizes.bounded(Sizes.MINIMUM, Sizes.constant("40dlu", false), Sizes.constant("175dlu", false)), 1),
+				new RowSpec(RowSpec.CENTER, Sizes.bounded(Sizes.MINIMUM, Sizes.constant("147dlu", false), Sizes.constant("175dlu", false)), 0),
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("top:default:grow"),}));
+				FormSpecs.DEFAULT_ROWSPEC,}));
 
 		JLabel lblTituloTela = new JLabel("Buscar Produtos");
 		lblTituloTela.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		add(lblTituloTela, "4, 4, 7, 1, center, default");
+		add(lblTituloTela, "4, 4, 5, 1, center, default");
 
 		JLabel lblProduto = new JLabel("Produto :     ");
-		add(lblProduto, "4, 6, right, default");
+		add(lblProduto, "4, 6, left, default");
 
 		textFNomeProduto = new JTextField();
 		add(textFNomeProduto, "6, 6, fill, default");
 		textFNomeProduto.setColumns(10);
 
 		 cBCategoria = new JComboBox(categorias);
-		add(cBCategoria, "10, 6, fill, default");
+		 cBCategoria.setBackground(SystemColor.inactiveCaption);
+		add(cBCategoria, "8, 6, fill, default");
 
 		JScrollPane scrollPane = new JScrollPane();
-		add(scrollPane, "4, 8, 7, 1, fill, fill");
+		add(scrollPane, "4, 8, 5, 1, fill, fill");
 
 		table = new JTable();
 		scrollPane.setViewportView(table);
@@ -96,7 +96,8 @@ public class TelaPesquisa extends Painel {
 				preencherTabela(cont);
 			}
 		});
-		add(btnBuscar, "10, 10, right, default");
+		add(btnBuscar, "8, 10, right, default");
+		limparTabela();
 	}
 	
 	public JButton getBtnDetalhes() {
@@ -140,7 +141,7 @@ public class TelaPesquisa extends Painel {
 		table.setModel(new DefaultTableModel(new Object[][] {,}, nomesColunas));
 	}
 	
-	public Produto resgatarPergunta() throws BitShowException {
+	public Produto resgatarProduto() throws BitShowException {
 
 		int linhaSelecionada = table.getSelectedRow();
 		if (linhaSelecionada == -1) {
@@ -153,9 +154,7 @@ public class TelaPesquisa extends Painel {
 
 	@Override
 	public void atualizarCampos() {
-		// TODO Auto-generated method stub
-		limparTabela();
-
+		
 	}
 
 }

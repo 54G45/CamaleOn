@@ -49,82 +49,80 @@ public class ProdutoDAO {
 	}
 
 	public ArrayList<Produto> pesquisar(Pesquisa pesquisa) {
-		
-		
-		String sql ="select * from produto where ";
-		
+
+		String sql = "select * from produto ";
+
 		String filtro = "";
-		if(pesquisa.getNomeProduto() != null) {
+		if (pesquisa.getNomeProduto() != null) {
 			filtro += "nome like '%" + pesquisa.getNomeProduto() + "%' ";
 		}
-		if(!filtro.isEmpty()) {
+		if (!filtro.isEmpty()) {
 			filtro += "and ";
 		}
-		if(pesquisa.getCategoria() != null) {
+		if (pesquisa.getCategoria() != null) {
 			filtro += "categoria = '" + pesquisa.getCategoria() + "'";
 		}
+		if (!filtro.isBlank()) {
+			filtro = "where " + filtro;
+		}
 		sql += filtro;
-		
+
 		ArrayList<Produto> produtos = new ArrayList<Produto>();
 		Connection conn = Banco.getConnection();
 		Statement pstmt = Banco.getStatement(conn);
 		ResultSet resultado = null;
 		try {
 			resultado = pstmt.executeQuery(sql);
-			while(resultado.next()){
-				
+			while (resultado.next()) {
+
 				Produto produto = montaProduto(resultado);
-				
+
 				produtos.add(produto);
 			}
-		}
-		catch(SQLException e){
+		} catch (SQLException e) {
 			System.out.println("Erro no método busca da classe PerguntaDAO");
 			System.out.println(e.getMessage());
-		}
-		finally{
+		} finally {
 			Banco.closeResultSet(resultado);
 			Banco.closeStatement(pstmt);
 			Banco.closeConnection(conn);
 		}
-	
+
 		return produtos;
 
 	}
-	
+
 	public ArrayList<Produto> buscarCarrinho(int iD) {
-		
-		String sql ="select produto.* from produto left join carrinho on carrinho.idproduto = produto.id where carrinho.idusuario = " + iD;
-		
+
+		String sql = "select produto.* from produto left join carrinho on carrinho.idproduto = produto.id where carrinho.idusuario = "
+				+ iD;
+
 		ArrayList<Produto> produtos = new ArrayList<Produto>();
 		Connection conn = Banco.getConnection();
 		Statement pstmt = Banco.getStatement(conn);
 		ResultSet resultado = null;
 		try {
 			resultado = pstmt.executeQuery(sql);
-			while(resultado.next()){
-				
+			while (resultado.next()) {
+
 				Produto produto = montaProduto(resultado);
-				
+
 				produtos.add(produto);
 			}
-		}
-		catch(SQLException e){
+		} catch (SQLException e) {
 			System.out.println("Erro no método busca da classe PerguntaDAO");
 			System.out.println(e.getMessage());
-		}
-		finally{
+		} finally {
 			Banco.closeResultSet(resultado);
 			Banco.closeStatement(pstmt);
 			Banco.closeConnection(conn);
 		}
-	
-		return produtos;
-		
-	}
-	
 
-	public Produto montaProduto(ResultSet rs) throws SQLException{
+		return produtos;
+
+	}
+
+	public Produto montaProduto(ResultSet rs) throws SQLException {
 		Usuario usuario = new Usuario();
 		usuario.setId(rs.getInt("idusuario"));
 
@@ -135,21 +133,36 @@ public class ProdutoDAO {
 		produto.setCategoria(rs.getString("categoria"));
 		produto.setPreco(rs.getString("preco"));
 		produto.setVendedor(usuario);
-		
-		
-		
+
 		return produto;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	public ArrayList<Produto> meusProdutos(int idUsuario) {
+
+		String sql = "select * from produto where produto.idusuario = " + idUsuario;
+
+		ArrayList<Produto> produtos = new ArrayList<Produto>();
+		Connection conn = Banco.getConnection();
+		Statement pstmt = Banco.getStatement(conn);
+		ResultSet resultado = null;
+		try {
+			resultado = pstmt.executeQuery(sql);
+			while (resultado.next()) {
+
+				Produto produto = montaProduto(resultado);
+
+				produtos.add(produto);
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro no método busca da classe PerguntaDAO");
+			System.out.println(e.getMessage());
+		} finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(pstmt);
+			Banco.closeConnection(conn);
+		}
+
+		return produtos;
+	}
+
 }

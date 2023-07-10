@@ -23,7 +23,6 @@ public class Janela {
 	private BitShowController cont = new BitShowController();
 	private TelaCadastro telaCadastro = new TelaCadastro();
 	private TelaCarrinho telaCarrinho = new TelaCarrinho();
-	private TelaInicial telaInicial = new TelaInicial();
 	private TelaLogin telaLogin = new TelaLogin();
 	private TelaLoja telaLoja = new TelaLoja();
 	private TelaLojaCadastro telaLojaCadastro = new TelaLojaCadastro();
@@ -76,7 +75,7 @@ public class Janela {
 					}
 					menuBar.setVisible(true);
 					telaLogin.atualizarCampos();
-					trocarPainel(telaInicial);
+					trocarPainel(telaPesquisa);
 				} catch (BitShowException erro) {
 					JOptionPane.showMessageDialog(null, erro.getMessage(), "Atenção!\n " + userLogado.getId(),
 							JOptionPane.WARNING_MESSAGE);
@@ -129,7 +128,8 @@ public class Janela {
 		mntmMinhaLoja.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				telaLoja.atualizarCampos();
+				telaLoja.atualizarCampos(userLogado);
+				telaLoja.preencherTabela(cont);
 				trocarPainel(telaLoja);
 
 			}
@@ -154,6 +154,7 @@ public class Janela {
 					produto.setVendedor(userLogado);
 					cont.getProdutoCont().cadastrarProduto(produto);
 					JOptionPane.showMessageDialog(null, "Produto Cadastrado com sucseo");
+					telaLojaCadastro.atualizarCampos();
 				} catch (BitShowException erro) {
 					JOptionPane.showMessageDialog(null, erro.getMessage(), "Atenção!", JOptionPane.WARNING_MESSAGE);
 				}
@@ -177,7 +178,7 @@ public class Janela {
 			public void actionPerformed(ActionEvent e) {
 
 				try {
-					telaProduto.atualizarCampos(telaPesquisa.resgatarPergunta());
+					telaProduto.atualizarCampos(telaPesquisa.resgatarProduto());
 					trocarPainel(telaProduto);
 				} catch (BitShowException erro) {
 					JOptionPane.showMessageDialog(null, erro.getMessage(), "Atenção!", JOptionPane.INFORMATION_MESSAGE);
@@ -236,8 +237,10 @@ public class Janela {
 		JMenuItem mntmSair = new JMenuItem("Sair");
 		mntmSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				System.exit(0);
+				
+				telaLogin.atualizarCampos();
+				trocarPainel(telaLogin);
+				menuBar.setVisible(false);
 
 			}
 		});

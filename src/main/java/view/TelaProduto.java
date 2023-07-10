@@ -36,9 +36,9 @@ public class TelaProduto extends Painel {
 				FormSpecs.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("right:default:grow"),
 				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),
+				ColumnSpec.decode("max(175dlu;min)"),
 				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),
+				ColumnSpec.decode("max(175dlu;min)"),
 				FormSpecs.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("left:default:grow"),},
 			new RowSpec[] {
@@ -51,7 +51,7 @@ public class TelaProduto extends Painel {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
-				new RowSpec(RowSpec.CENTER, Sizes.bounded(Sizes.DEFAULT, Sizes.constant("50dlu", false), Sizes.constant("150dlu", false)), 1),
+				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
@@ -69,20 +69,18 @@ public class TelaProduto extends Painel {
 		add(lblNome, "4, 8");
 
 		lblCategoria = new JLabel("Categoria");
-		add(lblCategoria, "6, 8");
-
-		JScrollPane scrollPane = new JScrollPane();
-		add(scrollPane, "4, 10, 3, 1, fill, fill");
-
-		txtrDescricao = new JTextArea();
-		txtrDescricao.setText("Descricao");
-		scrollPane.setViewportView(txtrDescricao);
+		add(lblCategoria, "6, 8, right, default");
+		
+				txtrDescricao = new JTextArea();
+				txtrDescricao.setLineWrap(true);
+				add(txtrDescricao, "4, 10, 3, 1");
+				txtrDescricao.setText("Descricao");
 
 		lblVendedor = new JLabel("Vendido por");
 		add(lblVendedor, "4, 12");
 
 		lblPreco = new JLabel("Preco");
-		add(lblPreco, "6, 12");
+		add(lblPreco, "6, 12, right, default");
 
 		lblContato = new JLabel("Contato");
 		add(lblContato, "4, 14");

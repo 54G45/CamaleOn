@@ -27,19 +27,32 @@ public class TelaCarrinho extends Painel {
 	private JButton btnRemover;
 	private ArrayList<Produto> produtos;
 	private String[] nomesColunas = { "Produto ", "Descrição", "Categoria", "Preço", "Vendedor" };
+	private JLabel lblSubTotal;
 
 	/**
 	 * Create the panel.
 	 */
 	public TelaCarrinho() {
-		setLayout(new FormLayout(new ColumnSpec[] { ColumnSpec.decode("right:default:grow"),
-				FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("max(262dlu;default):grow"),
-				FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("left:default:grow"), },
-				new RowSpec[] { RowSpec.decode("default:grow"), FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC, RowSpec.decode("max(168dlu;default):grow"),
-						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, RowSpec.decode("default:grow"), }));
+		setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("right:default:grow"),
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("max(350dlu;min)"),
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("left:default:grow"),},
+			new RowSpec[] {
+				RowSpec.decode("default:grow"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(168dlu;default):grow"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
 
 		JLabel lblNewLabel = new JLabel("Seu Carrinho");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -55,7 +68,7 @@ public class TelaCarrinho extends Painel {
 		};
 		scrollPane.setViewportView(table);
 
-		JLabel lblSubTotal = new JLabel("SubTotal : 00,0 R$");
+		 lblSubTotal = new JLabel("SubTotal : 00,0 R$");
 		add(lblSubTotal, "3, 9, right, default");
 
 		btnRemover = new JButton("Remover");
@@ -83,6 +96,7 @@ public class TelaCarrinho extends Painel {
 		produtos = cont.buscarCarrinho(idLogado);
 
 		limparTabela();
+		double subTotal = 0;
 
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 
@@ -95,14 +109,16 @@ public class TelaCarrinho extends Painel {
 			novaLinhaDaTabela[2] = p.getCategoria();
 			novaLinhaDaTabela[3] = p.getPreco();
 			novaLinhaDaTabela[4] = p.getVendedor().getUsuario();
+			subTotal = subTotal +  Double.parseDouble(p.getPreco());
+			
 
 			model.addRow(novaLinhaDaTabela);
 		}
-
+		lblSubTotal.setText("SubTotal : "+subTotal+ " R$");
 	}
 
 	public void removerDoCarrinho(BitShowController cont) throws BitShowException {
-		Produto produto = resgatarPergunta();
+		Produto produto = resgatarProduto();
 
 		int chave = cont.getCarDAO().removerDoCarrinho(produto.getId());
 		if (chave > 0) {
@@ -113,7 +129,7 @@ public class TelaCarrinho extends Painel {
 
 	}
 
-	public Produto resgatarPergunta() throws BitShowException {
+	public Produto resgatarProduto() throws BitShowException {
 
 		int linhaSelecionada = table.getSelectedRow();
 		if (linhaSelecionada == -1) {

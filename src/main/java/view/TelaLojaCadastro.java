@@ -23,7 +23,7 @@ public class TelaLojaCadastro extends Painel {
 	private Produto p = new Produto();
 	private JTextArea textADescricao;
 	private JComboBox cBCategoria;
-	private String[] categorias = { "cpu", "gpu", "placa-mãe", "RAM", "fonte" };
+	private String[] categorias = { "cpu", "gpu", "placa-mãe", "RAM", "fonte","SSD"};
 
 	/**
 	 * Create the panel.
@@ -33,9 +33,9 @@ public class TelaLojaCadastro extends Painel {
 				FormSpecs.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("default:grow"),
 				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
+				ColumnSpec.decode("max(40dlu;min)"),
 				FormSpecs.RELATED_GAP_COLSPEC,
-				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.DEFAULT, Sizes.constant("60dlu", true), Sizes.constant("100dlu", true)), 0),
+				ColumnSpec.decode("max(230dlu;min)"),
 				FormSpecs.RELATED_GAP_COLSPEC,
 				new ColumnSpec(ColumnSpec.FILL, Sizes.bounded(Sizes.DEFAULT, Sizes.constant("80dlu", true), Sizes.constant("120dlu", true)), 0),
 				FormSpecs.RELATED_GAP_COLSPEC,
@@ -90,7 +90,7 @@ public class TelaLojaCadastro extends Painel {
 		textFPreco.setColumns(10);
 		
 		 btnAdicionar = new JButton("Adicionar");
-		add(btnAdicionar, "4, 16, 5, 1");
+		add(btnAdicionar, "4, 16, 5, 1, center, default");
 		
 		
 
@@ -106,7 +106,7 @@ public class TelaLojaCadastro extends Painel {
 		
 		textFNomeProduto.setText("");
 		textADescricao.setText("");
-		cBCategoria.setSelectedIndex(-1);
+		cBCategoria.setSelectedIndex(0);
 		textFPreco.setText("");
 		
 	}

@@ -126,8 +126,13 @@ public class TelaCadastro extends Painel {
 
 	@Override
 	public void atualizarCampos() {
-		// TODO Auto-generated method stub
-
+		
+		textFEMail.setText("");
+		textFRepetSenha.setText("");
+		textFSenha.setText("");
+		textFTelefone.setText("");
+		textFUsuario.setText("");
+		
 	}
 
 	public Usuario resgatarUser() throws BitShowException {

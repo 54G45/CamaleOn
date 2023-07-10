@@ -26,6 +26,11 @@ public class ProdutoController {
 		
 		return pBo.buscarCarrinho(idLogado);
 	}
+
+	public ArrayList<Produto> meusProdutos(int idUsuario) {
+		// TODO Auto-generated method stub
+		return pBo.meusProdutos(idUsuario);
+	}
 	
 	
 

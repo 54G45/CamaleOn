@@ -119,7 +119,10 @@ public class TelaLogin extends Painel {
 	
 	@Override
 	public void atualizarCampos() {
-		// TODO Auto-generated method stub
+		
+		textFEmail.setText("");
+		textFSenha.setText("");
+		
 		
 	}
 }

@@ -27,4 +27,9 @@ public class ProdutoBO {
 		return pDao.buscarCarrinho(idLogado);
 	}
 
+	public ArrayList<Produto> meusProdutos(int idUsuario) {
+		
+		return pDao.meusProdutos(idUsuario);
+	}
+
 }
