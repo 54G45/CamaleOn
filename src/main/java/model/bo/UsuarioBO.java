@@ -24,4 +24,9 @@ public class UsuarioBO {
 		return vendedor;
 	}
 
+	public int editarUsuario(Usuario user) {
+		// TODO Auto-generated method stub
+		return uDao.editarUsuario(user);
+	}
+
 }

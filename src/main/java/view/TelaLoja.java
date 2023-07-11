@@ -125,8 +125,8 @@ public class TelaLoja extends Painel {
 	public void removerDaLoja(BitShowController cont) throws BitShowException {
 		Produto produto = resgatarProduto();
 
-		int chave = cont.getProdutoCont().removerDaLoja(produto.getId());
-		if (chave > 0) {
+		int chave = cont.removerDaLoja(produto.getId());
+		if (chave > 1) {
 			JOptionPane.showMessageDialog(null, "Produto Removido da Loja com Sucesso");
 		} else {
 			JOptionPane.showMessageDialog(null, "Falha ao Remover Produto da Loja");

@@ -230,6 +230,7 @@ public class Janela {
 
 				try {
 					telaCarrinho.removerDoCarrinho(cont);
+					telaCarrinho.atualizarCampos(cont, userLogado.getId());
 				} catch (BitShowException erro) {
 					JOptionPane.showMessageDialog(null, erro.getMessage(), "Atenção!", JOptionPane.INFORMATION_MESSAGE);
 				}
@@ -244,12 +245,26 @@ public class Janela {
 		mntmPerfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				telaPerfil.atualizarCampos();
+				telaPerfil.atualizarCampos(userLogado);
 				trocarPainel(telaPerfil);
 
 			}
 		});
 		mnConfig.add(mntmPerfil);
+		
+		telaPerfil.getBtnSalvar().addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					userLogado = telaPerfil.salvarAlterecoes(cont);
+					telaPerfil.atualizarCampos(userLogado);
+				} catch (BitShowException e1) {
+					e1.printStackTrace();
+				}
+				
+			}
+		});
 
 		JMenuItem mntmSair = new JMenuItem("Sair");
 		mntmSair.addActionListener(new ActionListener() {

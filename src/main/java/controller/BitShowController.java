@@ -47,6 +47,14 @@ public class BitShowController {
 		return produtos;
 	}
 
+	public int removerDaLoja(int id) {
+		int retorno = 0;
+		retorno += produtoCont.removerDaLoja(id);
+		retorno +=  carDAO.removerDoCarrinho(id);
+		
+		return retorno;
+	}
+
 	
 
 	

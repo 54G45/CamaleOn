@@ -21,4 +21,9 @@ public class UsuarioController {
 		return vendedor;
 	}
 
+	public int editarUsuario(Usuario user) {
+		// TODO Auto-generated method stub
+		return uBo.editarUsuario(user);
+	}
+
 }

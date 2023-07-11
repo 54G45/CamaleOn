@@ -101,4 +101,31 @@ public class UsuarioDAO {
 
 	}
 
+	public int editarUsuario(Usuario user) {
+		
+		String sql =  "update usuario set usuario = ?, e_mail = ?, telefone = ?, senha = ? where id = ?";
+		int registrosAfetados = 0;
+		Connection conn = Banco.getConnection();
+		PreparedStatement pStmt = Banco.getPreparedStmt(conn, sql);
+		try {
+			pStmt.setString(1, user.getUsuario());
+			pStmt.setString(2, user.getEmail());
+			pStmt.setString(3, user.getTelefone());
+			pStmt.setString(4, user.getSenha());
+			pStmt.setInt(5, user.getId());
+			registrosAfetados = pStmt.executeUpdate();
+		}
+		catch(SQLException e)
+		{
+			System.out.println("Erro no método atualizar da classe UsuarioDAO");
+			System.out.println(e.getMessage());
+		}
+		finally 
+		{
+			Banco.closeStatement(pStmt);
+			Banco.closeConnection(conn);
+		}
+		return registrosAfetados;
+	}
+
 }
