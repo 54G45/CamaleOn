@@ -32,4 +32,9 @@ public class ProdutoBO {
 		return pDao.meusProdutos(idUsuario);
 	}
 
+	public int removerDaLoja(int idproduto) {
+		
+		return pDao.removerDaLoja(idproduto);
+	}
+
 }

@@ -9,6 +9,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 
 import controller.BitShowController;
 import model.exception.BitShowException;
@@ -140,8 +141,24 @@ public class Janela {
 
 			public void actionPerformed(ActionEvent e) {
 
-				trocarPainel(telaLojaCadastro);
+				telaLojaCadastro.setVisible(true);
+				frame.setContentPane(new JScrollPane(telaLojaCadastro));
+				frame.revalidate();
 
+			}
+		});
+		
+		telaLoja.getBtnRemover().addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					telaLoja.removerDaLoja(cont);
+					telaLoja.preencherTabela(cont);
+				} catch (BitShowException erro) {
+					JOptionPane.showMessageDialog(null, erro.getMessage(), "Atenção!", JOptionPane.WARNING_MESSAGE);
+				}
+				
 			}
 		});
 
@@ -161,7 +178,7 @@ public class Janela {
 
 			}
 		});
-
+		
 		JMenuItem mntmPesquisa = new JMenuItem("Pesquisa");
 		mntmPesquisa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

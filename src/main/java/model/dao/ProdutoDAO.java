@@ -165,4 +165,27 @@ public class ProdutoDAO {
 		return produtos;
 	}
 
+	public int removerDaLoja(int idproduto) {
+		
+		
+		String sql = "delete from produto where produto.id = " + idproduto;
+		int linhasAfetadas = 0;
+		Connection con = Banco.getConnection();
+		PreparedStatement pStmt = Banco.getPreparedStmt(con, sql);
+		try {
+			
+			linhasAfetadas = pStmt.executeUpdate();
+
+		} catch (SQLException e) {
+			System.out.println("Erro no método excluirCarrinho");
+			System.out.println(e.getMessage());
+		} finally {
+			Banco.closeStatement(pStmt);
+			Banco.closeConnection(con);
+		}
+		
+		
+		return linhasAfetadas;
+	}
+
 }

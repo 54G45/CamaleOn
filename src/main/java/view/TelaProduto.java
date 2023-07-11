@@ -59,7 +59,7 @@ public class TelaProduto extends Painel {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("top:default:grow"),}));
+				RowSpec.decode("top:default"),}));
 
 		JLabel lblTituloPagina = new JLabel("Vizualizando Produto");
 		lblTituloPagina.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -70,11 +70,12 @@ public class TelaProduto extends Painel {
 
 		lblCategoria = new JLabel("Categoria");
 		add(lblCategoria, "6, 8, right, default");
-		
-				txtrDescricao = new JTextArea();
-				txtrDescricao.setLineWrap(true);
-				add(txtrDescricao, "4, 10, 3, 1");
-				txtrDescricao.setText("Descricao");
+
+		txtrDescricao = new JTextArea();
+		txtrDescricao.setEditable(false);
+		txtrDescricao.setLineWrap(true);
+		add(txtrDescricao, "4, 10, 3, 1");
+		txtrDescricao.setText("Descricao");
 
 		lblVendedor = new JLabel("Vendido por");
 		add(lblVendedor, "4, 12");
@@ -84,7 +85,7 @@ public class TelaProduto extends Painel {
 
 		lblContato = new JLabel("Contato");
 		add(lblContato, "4, 14");
-		
+
 		btnAdicionarAoCarrinho = new JButton("Adicionar ao Carrinho");
 		add(btnAdicionarAoCarrinho, "4, 16, 3, 1, center, default");
 
@@ -96,31 +97,31 @@ public class TelaProduto extends Painel {
 
 	public void atualizarCampos(Produto p) {
 		produto = p;
-		
+
 		lblNome.setText("Nome : " + p.getNome());
 		lblCategoria.setText("Categoria : " + p.getCategoria());
 		txtrDescricao.setText(p.getDescricao());
-		lblVendedor.setText("Vendedor : "+p.getVendedor().getUsuario());
-		lblPreco.setText("Preço : "+p.getPreco()+" R$");
-		lblContato.setText("Contato : "+p.getVendedor().getTelefone());
-		
+		lblVendedor.setText("Vendido Por : " + p.getVendedor().getUsuario());
+		lblPreco.setText("Preço : " + p.getPreco() + " R$");
+		lblContato.setText("Contato : (" + p.getVendedor().getTelefone().substring(0, 2) + ")9-"
+				+ p.getVendedor().getTelefone().substring(2, 6) + "-" + p.getVendedor().getTelefone().substring(6, 10));
+
 	}
-	
+
 	public void adicionarAoCarrinho(BitShowController cont, int idUsuario) {
-		
+
 		int chave = cont.getCarDAO().adicionarAoCarrinho(produto.getId(), idUsuario);
-		if(chave >= 0) {
+		if (chave >= 0) {
 			JOptionPane.showMessageDialog(null, "Produto adicionado ao Carrinho com Sucesso");
-		}else{
+		} else {
 			JOptionPane.showMessageDialog(null, "Falha ao adicionar Produto ao Carrinho");
 		}
-		
+
 	}
-	
 
 	@Override
 	public void atualizarCampos() {
-		
+
 	}
 
 }

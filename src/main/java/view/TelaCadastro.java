@@ -1,12 +1,14 @@
 package view;
 
 import java.awt.Font;
-import java.time.format.TextStyle;
+import java.text.ParseException;
 
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
@@ -17,14 +19,15 @@ import model.exception.BitShowException;
 import model.vo.Usuario;
 
 public class TelaCadastro extends Painel {
-	private JTextField textFTelefone;
 	private JTextField textFEMail;
-	private JTextField textFSenha;
-	private JTextField textFRepetSenha;
 	private JTextField textFUsuario;
 	private JButton btnCadastrar;
 	private JButton btnTrocarParaLogin;
 	private Usuario user = new Usuario();
+	private JPasswordField pFSenhaComfirm;
+	private JPasswordField pfSenha;
+	private JFormattedTextField fTxtTelefone;
+	private MaskFormatter mascaraTelefoneMovel;
 
 	public JButton getBtnCadastrar() {
 		return btnCadastrar;
@@ -45,7 +48,7 @@ public class TelaCadastro extends Painel {
 				FormSpecs.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("left:default:grow"),},
 			new RowSpec[] {
-				RowSpec.decode("default:grow"),
+				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("fill:max(22dlu;default)"),
 				FormSpecs.RELATED_GAP_ROWSPEC,
@@ -75,7 +78,7 @@ public class TelaCadastro extends Painel {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("default:grow"),}));
+				FormSpecs.DEFAULT_ROWSPEC,}));
 
 		JLabel lblTitulo = new JLabel("Criar Uma Nova Conta");
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -86,35 +89,36 @@ public class TelaCadastro extends Painel {
 
 		textFUsuario = new JTextField();
 		textFUsuario.setColumns(20);
-		add(textFUsuario, "3, 7");
+		add(textFUsuario, "3, 7, fill, default");
 
 		JLabel lblEmail = new JLabel("E-mail :");
 		add(lblEmail, "3, 9");
 
 		textFEMail = new JTextField();
 		textFEMail.setColumns(20);
-		add(textFEMail, "3, 11");
-				
-						JLabel lblTelefone = new JLabel("Telefone:");
-						add(lblTelefone, "3, 13");
-		
-				textFTelefone = new JTextField();
-				add(textFTelefone, "3, 15");
-				textFTelefone.setColumns(20);
+		add(textFEMail, "3, 11, fill, default");
+
+		JLabel lblTelefone = new JLabel("Telefone:");
+		add(lblTelefone, "3, 13");
+		try {
+			mascaraTelefoneMovel = new MaskFormatter("(##)9####-####");
+		} catch (ParseException e) {
+		}
+		mascaraTelefoneMovel.setValueContainsLiteralCharacters(false);
+		fTxtTelefone = new JFormattedTextField(mascaraTelefoneMovel);
+		add(fTxtTelefone, "3, 15, fill, default");
 
 		JLabel lblSenha = new JLabel("Senha :");
 		add(lblSenha, "3, 17");
 
-		textFSenha = new JTextField();
-		textFSenha.setColumns(20);
-		add(textFSenha, "3, 19");
+		pfSenha = new JPasswordField();
+		add(pfSenha, "3, 19, fill, default");
 
 		JLabel lblRepSenha = new JLabel("Comfirmar Senha :");
 		add(lblRepSenha, "3, 21");
 
-		textFRepetSenha = new JTextField();
-		textFRepetSenha.setColumns(20);
-		add(textFRepetSenha, "3, 23");
+		pFSenhaComfirm = new JPasswordField();
+		add(pFSenhaComfirm, "3, 23, fill, default");
 
 		btnCadastrar = new JButton("Cadastrar");
 		add(btnCadastrar, "3, 27");
@@ -126,23 +130,24 @@ public class TelaCadastro extends Painel {
 
 	@Override
 	public void atualizarCampos() {
-		
+
 		textFEMail.setText("");
-		textFRepetSenha.setText("");
-		textFSenha.setText("");
-		textFTelefone.setText("");
+		pFSenhaComfirm.setText("");
+		pfSenha.setText("");
+		fTxtTelefone.setText("");
 		textFUsuario.setText("");
-		
+
 	}
 
 	public Usuario resgatarUser() throws BitShowException {
 
-			
-		
 		user.setUsuario(textFUsuario.getText());
 		user.setEmail(textFEMail.getText());
-		user.setTelefone(textFTelefone.getText());
-		user.setSenha(textFSenha.getText());
+		try {
+			user.setTelefone((String )mascaraTelefoneMovel.stringToValue(fTxtTelefone.getText()));
+		} catch (ParseException e) {
+		}
+		user.setSenha(new String(pfSenha.getPassword()));
 		validarCampos();
 
 		return user;
@@ -163,10 +168,10 @@ public class TelaCadastro extends Painel {
 		if (user.getSenha() == null || user.getSenha().trim().isEmpty()) {
 			alerta += "Insira uma Senha\n";
 		}
-		if (textFRepetSenha.getText().trim().isEmpty()) {
+		if (pFSenhaComfirm.getPassword().toString().isBlank()) {
 			alerta += "Comfirme a Senha\n";
 		}
-		if (!textFRepetSenha.getText().equals(user.getSenha())) {
+		if (!new String(pFSenhaComfirm.getPassword()).equals(user.getSenha())) {
 			alerta += "Senhas inseridas não Coincidem";
 		}
 

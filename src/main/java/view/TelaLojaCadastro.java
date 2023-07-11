@@ -50,15 +50,15 @@ public class TelaLojaCadastro extends Painel {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("default:grow"),
-				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("default:grow"),}));
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
 		
 		JLabel lblNewLabel = new JLabel("Postar Venda");
 		add(lblNewLabel, "4, 4, 5, 1, center, default");
@@ -76,11 +76,9 @@ public class TelaLojaCadastro extends Painel {
 		 cBCategoria = new JComboBox(categorias);
 		add(cBCategoria, "8, 8, fill, default");
 		
-		JScrollPane scrollPane = new JScrollPane();
-		add(scrollPane, "4, 10, 5, 1, fill, fill");
-		
 		 textADescricao = new JTextArea();
-		scrollPane.setViewportView(textADescricao);
+		 textADescricao.setLineWrap(true);
+		 add(textADescricao, "4, 10, 5, 1");
 		
 		JLabel lblNewLabel_2 = new JLabel("Preço : ");
 		add(lblNewLabel_2, "4, 14, left, default");

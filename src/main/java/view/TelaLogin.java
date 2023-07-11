@@ -14,10 +14,11 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import model.exception.BitShowException;
 import model.vo.Usuario;
+import javax.swing.JPasswordField;
 
 public class TelaLogin extends Painel {
 	private JTextField textFEmail;
-	private JTextField textFSenha;
+	private JPasswordField textFSenha;
 	private JButton btnLogin;
 	private JButton btnTrocarParaCadastro;
 	private Usuario user = new Usuario();
@@ -34,79 +35,62 @@ public class TelaLogin extends Painel {
 	 * Create the panel.
 	 */
 	public TelaLogin() {
-		setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("right:default:grow"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("center:default"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("left:default:grow"),},
-			new RowSpec[] {
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("bottom:default:grow"),
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("max(22dlu;default)"),
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("top:default:grow"),}));
-		
+		setLayout(new FormLayout(
+				new ColumnSpec[] { FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("right:default:grow"),
+						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("center:default"),
+						FormSpecs.RELATED_GAP_COLSPEC, ColumnSpec.decode("left:default:grow"), },
+				new RowSpec[] { FormSpecs.RELATED_GAP_ROWSPEC, RowSpec.decode("bottom:default:grow"),
+						FormSpecs.RELATED_GAP_ROWSPEC, RowSpec.decode("max(22dlu;default)"),
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("top:default:grow"), }));
+
 		JLabel lblNewLabel = new JLabel("ENTRAR");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		add(lblNewLabel, "4, 4");
-		
+
 		JLabel lblUsuario = new JLabel("Email :");
 		add(lblUsuario, "4, 6");
-		
+
 		textFEmail = new JTextField();
 		textFEmail.setForeground(Color.BLACK);
 		add(textFEmail, "4, 8");
 		textFEmail.setColumns(20);
-		
+
 		JLabel lblSenha = new JLabel("Senha :");
 		add(lblSenha, "4, 10");
-		
-		textFSenha = new JTextField();
+
+		textFSenha = new JPasswordField();
 		add(textFSenha, "4, 12");
 		textFSenha.setColumns(20);
-		
-		 btnLogin = new JButton("Login");
+
+		btnLogin = new JButton("Login");
 		add(btnLogin, "4, 16");
-		
-		 btnTrocarParaCadastro = new JButton("Ainda Não Tenho Conta");
+
+		btnTrocarParaCadastro = new JButton("Ainda Não Tenho Conta");
 		add(btnTrocarParaCadastro, "4, 18");
 
 	}
-	
+
 	public Usuario efetuarLogin() throws BitShowException {
-		
+
 		user.setEmail(textFEmail.getText());
-		user.setSenha(textFSenha.getText());
+		user.setSenha(new String(textFSenha.getPassword()));
 		validarCampos();
-		
-		
+
 		return user;
 	}
-	
+
 	public void validarCampos() throws BitShowException {
 
 		String alerta = "";
-		if (user.getEmail() == null || user.getEmail().trim().isEmpty()) {
+		if (user.getEmail() == null || user.getEmail().isBlank()) {
 			alerta += "Insira um Email\n";
 		}
-		if (user.getSenha() == null || user.getSenha().trim().isEmpty()) {
+		if (user.getSenha() == null || user.getSenha().isBlank()) {
 			alerta += "Insira uma Senha\n";
 		}
 
@@ -116,13 +100,11 @@ public class TelaLogin extends Painel {
 		}
 	}
 
-	
 	@Override
 	public void atualizarCampos() {
-		
+
 		textFEmail.setText("");
 		textFSenha.setText("");
-		
-		
+
 	}
 }

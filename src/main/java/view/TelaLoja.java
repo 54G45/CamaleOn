@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -13,6 +14,7 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 import controller.BitShowController;
+import model.exception.BitShowException;
 import model.vo.Produto;
 import model.vo.Usuario;
 
@@ -73,6 +75,10 @@ public class TelaLoja extends Painel {
 		limparTabela();
 	}
 
+	public JButton getBtnRemover() {
+		return btnRemover;
+	}
+
 	public JButton getBtnAdicionar() {
 		return btnAdicionar;
 	}
@@ -103,6 +109,29 @@ public class TelaLoja extends Painel {
 
 	private void limparTabela() {
 		table.setModel(new DefaultTableModel(new Object[][] {,}, nomesColunas));
+	}
+	
+	public Produto resgatarProduto() throws BitShowException {
+
+		int linhaSelecionada = table.getSelectedRow();
+		if (linhaSelecionada == -1) {
+			throw new BitShowException("Selecione um Produto!");
+		}
+		Produto produto = produtos.get(linhaSelecionada);
+		return produto;
+
+	}
+	
+	public void removerDaLoja(BitShowController cont) throws BitShowException {
+		Produto produto = resgatarProduto();
+
+		int chave = cont.getProdutoCont().removerDaLoja(produto.getId());
+		if (chave > 0) {
+			JOptionPane.showMessageDialog(null, "Produto Removido da Loja com Sucesso");
+		} else {
+			JOptionPane.showMessageDialog(null, "Falha ao Remover Produto da Loja");
+		}
+
 	}
 
 	public void atualizarCampos(Usuario userLogado) {

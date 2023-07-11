@@ -41,7 +41,6 @@ public class CarrinhoDAO {
 	}
 
 	public int removerDoCarrinho(int id) {
-		// TODO Auto-generated method stub
 		
 		String sql = "delete from carrinho where carrinho.idproduto = " + id;
 		int linhasAfetadas = 0;

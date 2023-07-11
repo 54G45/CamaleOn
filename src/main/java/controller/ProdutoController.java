@@ -31,6 +31,11 @@ public class ProdutoController {
 		// TODO Auto-generated method stub
 		return pBo.meusProdutos(idUsuario);
 	}
+
+	public int removerDaLoja(int idproduto) {
+		// TODO Auto-generated method stub
+		return pBo.removerDaLoja(idproduto);
+	}
 	
 	
 
