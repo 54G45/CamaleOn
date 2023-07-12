@@ -270,6 +270,8 @@ public class Janela {
 		mntmSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				userLogado.setEmail("");
+				userLogado.setSenha("");
 				telaLogin.atualizarCampos();
 				trocarPainel(telaLogin);
 				menuBar.setVisible(false);

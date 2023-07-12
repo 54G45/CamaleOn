@@ -1,11 +1,19 @@
 package view;
 
+import java.awt.Font;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Locale;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
@@ -14,13 +22,7 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import controller.BitShowController;
 import model.exception.BitShowException;
-import model.vo.Pesquisa;
 import model.vo.Produto;
-
-import java.awt.Font;
-import java.util.ArrayList;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class TelaCarrinho extends Painel {
 	private JTable table;
@@ -98,11 +100,13 @@ public class TelaCarrinho extends Painel {
 			novaLinhaDaTabela[2] = p.getCategoria();
 			novaLinhaDaTabela[3] = "R$ "+p.getPreco();
 			novaLinhaDaTabela[4] = p.getVendedor().getUsuario();
-			subTotal = subTotal + Double.parseDouble(p.getPreco());
+			subTotal = subTotal + Double.parseDouble(p.getPreco().replace(".", "").replace(",", "."));
 
 			model.addRow(novaLinhaDaTabela);
 		}
-		lblSubTotal.setText("SubTotal : " + subTotal + " R$");
+        NumberFormat formatoMoeda = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        String valorFormatado = formatoMoeda.format(subTotal);
+		lblSubTotal.setText("SubTotal : R$ " + valorFormatado);
 	}
 
 	public void removerDoCarrinho(BitShowController cont) throws BitShowException {

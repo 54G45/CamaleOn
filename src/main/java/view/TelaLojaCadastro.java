@@ -29,7 +29,7 @@ public class TelaLojaCadastro extends Painel {
 	private Produto p = new Produto();
 	private JTextArea textADescricao;
 	private JComboBox cBCategoria;
-	private String[] categorias = { "cpu", "gpu", "placa-mãe", "RAM", "fonte", "SSD" };
+	private String[] categorias = {"CPU", "GPU", "Placa-mãe", "RAM", "Fonte", "SSD"};
 	private JLabel lblNewLabel_4;
 
 	/**
