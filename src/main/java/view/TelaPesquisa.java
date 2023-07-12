@@ -30,7 +30,7 @@ public class TelaPesquisa extends Painel {
 	private Pesquisa pesquisa;
 	private JTextField textFNomeProduto;
 	private ArrayList<Produto> produtos;
-	private String[] categorias = {"cpu", "gpu", "placa-mãe", "RAM", "fonte", "SSD"};
+	private String[] categorias = {"CPU", "GPU", "Placa-mãe", "RAM", "Fonte", "SSD"};
 	private String[] nomesColunas = {"Produto ", "Descrição", "Categoria", "Preço", "Vendedor",};
 	private JComboBox cBCategoria;
 	private JButton btnDetalhes;
@@ -121,7 +121,7 @@ public class TelaPesquisa extends Painel {
 			novaLinhaDaTabela[0] = p.getNome();
 			novaLinhaDaTabela[1] = p.getDescricao();
 			novaLinhaDaTabela[2] = p.getCategoria();
-			novaLinhaDaTabela[3] = p.getPreco();
+			novaLinhaDaTabela[3] = "R$ "+p.getPreco();
 			novaLinhaDaTabela[4] = p.getVendedor().getUsuario();
 
 			model.addRow(novaLinhaDaTabela);

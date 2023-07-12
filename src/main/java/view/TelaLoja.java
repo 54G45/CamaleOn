@@ -99,7 +99,7 @@ public class TelaLoja extends Painel {
 			novaLinhaDaTabela[0] = p.getNome();
 			novaLinhaDaTabela[1] = p.getDescricao();
 			novaLinhaDaTabela[2] = p.getCategoria();
-			novaLinhaDaTabela[3] = p.getPreco();
+			novaLinhaDaTabela[3] = "R$ "+p.getPreco();
 			novaLinhaDaTabela[4] = p.getVendedor().getUsuario();
 
 			model.addRow(novaLinhaDaTabela);
@@ -126,7 +126,7 @@ public class TelaLoja extends Painel {
 		Produto produto = resgatarProduto();
 
 		int chave = cont.removerDaLoja(produto.getId());
-		if (chave > 1) {
+		if (chave > 0) {
 			JOptionPane.showMessageDialog(null, "Produto Removido da Loja com Sucesso");
 		} else {
 			JOptionPane.showMessageDialog(null, "Falha ao Remover Produto da Loja");

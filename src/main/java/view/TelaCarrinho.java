@@ -96,7 +96,7 @@ public class TelaCarrinho extends Painel {
 			novaLinhaDaTabela[0] = p.getNome();
 			novaLinhaDaTabela[1] = p.getDescricao();
 			novaLinhaDaTabela[2] = p.getCategoria();
-			novaLinhaDaTabela[3] = p.getPreco();
+			novaLinhaDaTabela[3] = "R$ "+p.getPreco();
 			novaLinhaDaTabela[4] = p.getVendedor().getUsuario();
 			subTotal = subTotal + Double.parseDouble(p.getPreco());
 

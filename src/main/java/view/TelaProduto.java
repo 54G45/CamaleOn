@@ -102,7 +102,7 @@ public class TelaProduto extends Painel {
 		lblCategoria.setText("Categoria : " + p.getCategoria());
 		txtrDescricao.setText(p.getDescricao());
 		lblVendedor.setText("Vendido Por : " + p.getVendedor().getUsuario());
-		lblPreco.setText("Preço : " + p.getPreco() + " R$");
+		lblPreco.setText("Preço : R$ " + p.getPreco());
 		lblContato.setText("Contato : (" + p.getVendedor().getTelefone().substring(0, 2) + ")9-"
 				+ p.getVendedor().getTelefone().substring(2, 6) + "-" + p.getVendedor().getTelefone().substring(6, 10));
 
