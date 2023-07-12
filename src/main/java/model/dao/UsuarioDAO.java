@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
+
 import model.Banco;
 import model.vo.Usuario;
 
@@ -33,6 +35,7 @@ public class UsuarioDAO {
 		} catch (SQLException e) {
 			System.out.println("Erro no método inserir da classe UsuarioDAO");
 			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Erro ao Cadastrar", JOptionPane.WARNING_MESSAGE);
 		} finally {
 			Banco.closeResultSet(rs);
 			Banco.closeStatement(pStmt);

@@ -170,7 +170,7 @@ public class Janela {
 					produto = telaLojaCadastro.cadastrarProduto();
 					produto.setVendedor(userLogado);
 					cont.getProdutoCont().cadastrarProduto(produto);
-					JOptionPane.showMessageDialog(null, "Produto Cadastrado com sucseo");
+					JOptionPane.showMessageDialog(null, "Produto Cadastrado com sucesso");
 					telaLojaCadastro.atualizarCampos();
 				} catch (BitShowException erro) {
 					JOptionPane.showMessageDialog(null, erro.getMessage(), "Atenção!", JOptionPane.WARNING_MESSAGE);

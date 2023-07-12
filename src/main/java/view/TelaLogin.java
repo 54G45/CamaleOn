@@ -13,6 +13,7 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 import model.exception.BitShowException;
+import model.valida.Valida;
 import model.vo.Usuario;
 import javax.swing.JPasswordField;
 
@@ -93,7 +94,6 @@ public class TelaLogin extends Painel {
 		if (user.getSenha() == null || user.getSenha().isBlank()) {
 			alerta += "Insira uma Senha\n";
 		}
-
 		if (!alerta.isEmpty()) {
 			alerta = "Causa : \n" + alerta;
 			throw new BitShowException(alerta);

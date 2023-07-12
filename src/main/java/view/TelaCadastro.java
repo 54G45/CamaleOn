@@ -16,6 +16,7 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 import model.exception.BitShowException;
+import model.valida.Valida;
 import model.vo.Usuario;
 
 public class TelaCadastro extends Painel {
@@ -161,6 +162,10 @@ public class TelaCadastro extends Painel {
 		}
 		if (user.getEmail() == null || user.getEmail().trim().isEmpty()) {
 			alerta += "Insira um E-mail\n";
+		}else {
+			if (!Valida.eMail(user.getEmail())) {
+				alerta += "Insira um E-mail Válido\n";
+			}
 		}
 		if (user.getTelefone() == null || user.getTelefone().trim().isEmpty()) {
 			alerta += "Insira um Telefone\n";
@@ -172,7 +177,10 @@ public class TelaCadastro extends Painel {
 			alerta += "Comfirme a Senha\n";
 		}
 		if (!new String(pFSenhaComfirm.getPassword()).equals(user.getSenha())) {
-			alerta += "Senhas inseridas não Coincidem";
+			alerta += "Senhas inseridas não Coincidem\n";
+		}
+		if(!Valida.forcaSenha(new String(pFSenhaComfirm.getPassword()))) {
+			alerta += "Senha de ter no mínimo 6 Caracteres e\n1 caractere maiúsculo\n1 caractere minusculo\n1 caractere numérico";
 		}
 
 		if (!alerta.isEmpty()) {
